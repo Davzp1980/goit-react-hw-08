@@ -13,6 +13,7 @@ export function ContactList() {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
   return (
     <ul className={css.ul}>
       {sortedContacts.map(contact => (
