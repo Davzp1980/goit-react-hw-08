@@ -12,6 +12,7 @@ import { Layout } from './components/Layout';
 import { selectIsRefreshing } from './redux/auth/selectors';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRouter';
+import { refreshUser } from './redux/auth/operations';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const ContactsPage = lazy(() => import('./pages/ContactsPage/ContactsPage'));
@@ -24,8 +25,12 @@ function App() {
   // const isLoading = useSelector(selectIsLoading);
   const isRefreshing = useSelector(selectIsRefreshing);
 
+  // useEffect(() => {
+  //   dispatch(fetchContacts());
+  // }, [dispatch]);
+
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return isRefreshing ? (
