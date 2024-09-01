@@ -1,12 +1,9 @@
 import './App.css';
 
-// import ContactForm from './components/ContactForm/ContactForm';
-// import SearchBox from './components/SearchBox/SearchBox';
-// import ContactList from './components/ContactList/ContactList';
 import { lazy, useEffect } from 'react';
-import { fetchContacts } from './redux/contacts/contactsOps';
+
 import { useDispatch, useSelector } from 'react-redux';
-// import { selectError, selectIsLoading } from './redux/selectors';
+
 import { Route, Routes } from 'react-router';
 import { Layout } from './components/Layout';
 import { selectIsRefreshing } from './redux/auth/selectors';
@@ -49,7 +46,7 @@ function App() {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo="/tasks"
+                redirectTo="/contacts"
                 component={<RegisterPage />}
               />
             }
@@ -57,7 +54,10 @@ function App() {
           <Route
             path="/login"
             element={
-              <RestrictedRoute redirectTo="/tasks" component={<LoginPage />} />
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LoginPage />}
+              />
             }
           />
           <Route

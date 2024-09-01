@@ -3,7 +3,7 @@ import css from './SearchBox.module.css';
 import { changeFilter } from '../../redux/filtersSlice';
 import { useDispatch } from 'react-redux';
 
-function SearchBox() {
+export function SearchBox() {
   const searchFieldId = useId();
 
   const dispatch = useDispatch();
