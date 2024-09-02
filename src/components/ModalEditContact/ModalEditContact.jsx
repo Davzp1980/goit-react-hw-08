@@ -64,19 +64,6 @@ function ModalEditContact() {
           </button>
         </Form>
       </Formik>
-      {/* <form className={css.form} onSubmit={handleEdit}>
-        <label className={css.label}>
-          Name
-          <input type="text" name="name" />
-        </label>
-        <label className={css.label}>
-          Phone number
-          <input type="text" name="number" />
-        </label>
-        <button className={css.button} type="submit">
-          Edit
-        </button>
-      </form> */}
     </>
   );
 }
