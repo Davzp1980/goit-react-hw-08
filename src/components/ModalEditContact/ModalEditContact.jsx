@@ -4,8 +4,7 @@ import css from './ModalEditContact.module.css';
 import { setModalEditVisible } from '../../redux/filtersSlice';
 import { EditContact } from '../../redux/contacts/contactsOps';
 import { selectContactId } from '../../redux/selectors';
-import { Field, Formik } from 'formik';
-import { Form } from 'react-router-dom';
+import { Field, Formik, Form, ErrorMessage } from 'formik';
 
 function ModalEditContact() {
   const dispatch = useDispatch();
@@ -29,12 +28,12 @@ function ModalEditContact() {
   };
 
   const ValidationSchema = yup.object().shape({
-    contactName: yup
+    name: yup
       .string()
       .min(3, 'Too short name')
       .max(50, 'Too long name')
       .required('Must be filled in'),
-    phoneNumber: yup
+    number: yup
       .string()
       .min(9, 'Phone number consists of 9 digits')
       .max(9, 'Phone number consists of 9 digits')
@@ -51,11 +50,15 @@ function ModalEditContact() {
           <label className={css.label}>
             Name
             <Field type="text" name="name" />
+            <ErrorMessage name="name" component="span" />
           </label>
+
           <label className={css.label}>
             Phone number
             <Field type="text" name="number" />
+            <ErrorMessage name="number" component="span" />
           </label>
+
           <button className={css.button} type="submit">
             Edit
           </button>
