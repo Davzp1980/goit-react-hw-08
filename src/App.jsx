@@ -10,6 +10,13 @@ import { selectIsRefreshing } from './redux/auth/selectors';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRouter';
 import { refreshUser } from './redux/auth/operations';
+import ModalDeleteContact from './components/ModalDeleteContact/ModalDeleteContact';
+import {
+  selectIsModalDelVisible,
+  selectIsModalEditVisible,
+} from './redux/selectors';
+import { Toaster } from 'react-hot-toast';
+import ModalEditContact from './components/ModalEditContact/ModalEditContact';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const ContactsPage = lazy(() => import('./pages/ContactsPage/ContactsPage'));
@@ -18,13 +25,10 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 
 function App() {
   const dispatch = useDispatch();
-  // const error = useSelector(selectError);
-  // const isLoading = useSelector(selectIsLoading);
-  const isRefreshing = useSelector(selectIsRefreshing);
 
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const isModalDelVisible = useSelector(selectIsModalDelVisible);
+  const isModalEditVisible = useSelector(selectIsModalEditVisible);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -34,11 +38,6 @@ function App() {
     <b>Refreshing user...</b>
   ) : (
     <div className="container">
-      {/* <h1>Phone book</h1>
-      <ContactForm />
-      <SearchBox />
-      {isLoading && !error && <p>Loading...</p>}
-      <ContactList /> */}
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -68,6 +67,9 @@ function App() {
           />
         </Routes>
       </Layout>
+      <Toaster />
+      {isModalDelVisible && <ModalDeleteContact />}
+      {isModalEditVisible && <ModalEditContact />}
     </div>
   );
 }

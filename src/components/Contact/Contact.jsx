@@ -3,13 +3,24 @@ import css from './Contact.module.css';
 import { FaUserLarge } from 'react-icons/fa6';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contacts/contactsOps';
+
+import {
+  setContactId,
+  setModalDelVisible,
+  setModalEditVisible,
+} from '../../redux/filtersSlice';
 
 function Contact({ contact: { id, name, number } }) {
   const dispatch = useDispatch();
 
-  function handleClick() {
-    dispatch(deleteContact(id));
+  function handleClickDelete() {
+    dispatch(setContactId(id));
+    dispatch(setModalDelVisible(true));
+  }
+
+  function handleClickEdit() {
+    dispatch(setContactId(id));
+    dispatch(setModalEditVisible(true));
   }
 
   return (
@@ -23,8 +34,11 @@ function Contact({ contact: { id, name, number } }) {
           <FaPhoneAlt className={css.iconPhone} /> {number}
         </p>
       </div>
-      <button className={css.btn} type="button" onClick={handleClick}>
+      <button className={css.btn} type="button" onClick={handleClickDelete}>
         Delete
+      </button>
+      <button className={css.btn} type="button" onClick={handleClickEdit}>
+        Edit
       </button>
     </div>
   );

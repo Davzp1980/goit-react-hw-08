@@ -1,6 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/operations';
 import css from './LoginForm.module.css';
+import toast from 'react-hot-toast';
+
+const notify = () =>
+  toast(`You're logged in`, {
+    duration: 3000,
+    style: {
+      backgroundColor: 'rgb(83, 245, 83)',
+    },
+  });
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -18,6 +27,7 @@ export const LoginForm = () => {
       .unwrap()
       .then(() => {
         console.log('login success');
+        notify();
       })
       .catch(() => {
         console.log('login error');
