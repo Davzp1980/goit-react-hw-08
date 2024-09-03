@@ -9,6 +9,7 @@ import {
   setModalDelVisible,
   setModalEditVisible,
 } from '../../redux/filtersSlice';
+import { Button } from '@mui/material';
 
 function Contact({ contact: { id, name, number } }) {
   const dispatch = useDispatch();
@@ -34,12 +35,25 @@ function Contact({ contact: { id, name, number } }) {
           <FaPhoneAlt className={css.iconPhone} /> {number}
         </p>
       </div>
-      <button className={css.btn} type="button" onClick={handleClickDelete}>
-        Delete
-      </button>
-      <button className={css.btn} type="button" onClick={handleClickEdit}>
-        Edit
-      </button>
+      <div className={css.btnContainer}>
+        <Button
+          className={css.btn}
+          type="button"
+          onClick={handleClickDelete}
+          variant="contained"
+          color="error"
+        >
+          Delete
+        </Button>
+        <Button
+          className={css.btn}
+          type="button"
+          onClick={handleClickEdit}
+          variant="contained"
+        >
+          Edit
+        </Button>
+      </div>
     </div>
   );
 }

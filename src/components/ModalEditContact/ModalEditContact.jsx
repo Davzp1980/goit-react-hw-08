@@ -5,6 +5,7 @@ import { setModalEditVisible } from '../../redux/filtersSlice';
 import { EditContact } from '../../redux/contacts/contactsOps';
 import { selectContactId } from '../../redux/selectors';
 import { Field, Formik, Form, ErrorMessage } from 'formik';
+import { Button } from '@mui/material';
 
 function ModalEditContact() {
   const dispatch = useDispatch();
@@ -49,19 +50,34 @@ function ModalEditContact() {
         <Form className={css.form}>
           <label className={css.label}>
             Name
-            <Field type="text" name="name" />
+            <Field className={css.input} type="text" name="name" />
             <ErrorMessage name="name" component="span" />
           </label>
 
           <label className={css.label}>
             Phone number
-            <Field type="text" name="number" />
+            <Field className={css.input} type="text" name="number" />
             <ErrorMessage name="number" component="span" />
           </label>
-
-          <button className={css.button} type="submit">
-            Edit
-          </button>
+          <div className={css.btnContainer}>
+            <Button
+              className={css.button}
+              type="submit"
+              variant="contained"
+              color="success"
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={() => dispatch(setModalEditVisible(false))}
+              className={css.button}
+              type="button"
+              variant="contained"
+              color="secondary"
+            >
+              Return
+            </Button>
+          </div>
         </Form>
       </Formik>
     </>

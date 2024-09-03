@@ -12,11 +12,13 @@ import { PrivateRoute } from './components/PrivateRouter';
 import { refreshUser } from './redux/auth/operations';
 import ModalDeleteContact from './components/ModalDeleteContact/ModalDeleteContact';
 import {
+  selectIsLoading,
   selectIsModalDelVisible,
   selectIsModalEditVisible,
 } from './redux/selectors';
 import { Toaster } from 'react-hot-toast';
 import ModalEditContact from './components/ModalEditContact/ModalEditContact';
+import { RotatingLines } from 'react-loader-spinner';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const ContactsPage = lazy(() => import('./pages/ContactsPage/ContactsPage'));
@@ -29,6 +31,7 @@ function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
   const isModalDelVisible = useSelector(selectIsModalDelVisible);
   const isModalEditVisible = useSelector(selectIsModalEditVisible);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -67,6 +70,11 @@ function App() {
           />
         </Routes>
       </Layout>
+      {isLoading && (
+        <div className="loader-container">
+          <RotatingLines strokeColor="blue" />
+        </div>
+      )}
       <Toaster />
       {isModalDelVisible && <ModalDeleteContact />}
       {isModalEditVisible && <ModalEditContact />}

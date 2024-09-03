@@ -4,6 +4,7 @@ import { useId } from 'react';
 import css from './ContactForm.module.css';
 import * as yup from 'yup';
 import { ErrorMessage } from 'formik';
+import Button from '@mui/material/Button';
 
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/contactsOps';
@@ -48,6 +49,7 @@ export function ContactForm() {
     >
       <Form className={css.form}>
         <label htmlFor={contactNameFieldId}>Name</label>
+
         <Field
           className={css.field}
           type="text"
@@ -63,9 +65,9 @@ export function ContactForm() {
           id={phoneNumberFieldId}
         />
         <ErrorMessage name="phoneNumber" component="span" />
-        <button className={css.button} type="submit">
+        <Button className={css.button} type="submit" variant="contained">
           Add contact
-        </button>
+        </Button>
       </Form>
     </Formik>
   );

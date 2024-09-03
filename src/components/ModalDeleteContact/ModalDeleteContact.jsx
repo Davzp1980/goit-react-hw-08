@@ -5,6 +5,7 @@ import { deleteContact } from '../../redux/contacts/contactsOps';
 import { selectContactId } from '../../redux/selectors';
 import { setModalDelVisible } from '../../redux/filtersSlice';
 import toast from 'react-hot-toast';
+import { Button } from '@mui/material';
 function ModalDeleteContact() {
   const dispatch = useDispatch();
   const id = useSelector(selectContactId);
@@ -30,20 +31,24 @@ function ModalDeleteContact() {
     <div className={clsx(css.container)}>
       <p className={css.p}>Do you really want to delete a contact? </p>
       <div className={css.btnContainer}>
-        <button
+        <Button
           className={css.buttonDel}
           type="button"
           onClick={handleClickDelete}
+          variant="contained"
+          color="error"
         >
           Delete
-        </button>
-        <button
+        </Button>
+        <Button
           className={css.buttonRet}
           type="button"
           onClick={handleClickReturn}
+          variant="contained"
+          color="secondary"
         >
           Return
-        </button>
+        </Button>
       </div>
     </div>
   );
