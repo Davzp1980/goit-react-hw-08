@@ -4,7 +4,7 @@ import Contact from '../Contact/Contact';
 import css from './ContactList.module.css';
 import { selectFilteredContacts } from '../../redux/selectors';
 import { useEffect } from 'react';
-import { fetchContacts } from '../../redux/contacts/contactsOps';
+import { fetchContacts } from '../../redux/contacts/operations';
 
 export function ContactList() {
   const sortedContacts = useSelector(selectFilteredContacts);

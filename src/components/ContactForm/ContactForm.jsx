@@ -7,7 +7,7 @@ import { ErrorMessage } from 'formik';
 import Button from '@mui/material/Button';
 
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contacts/contactsOps';
+import { addContact } from '../../redux/contacts/operations';
 
 export function ContactForm() {
   const contactNameFieldId = useId();
