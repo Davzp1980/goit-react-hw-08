@@ -10,15 +10,15 @@ const notify = () =>
     },
   });
 
-const contactsAxios = axios.create({
-  baseURL: 'https://connections-api.goit.global/',
-});
+// const contactsAxios = axios.create({
+//   baseURL: 'https://connections-api.goit.global/users/me',
+// });
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async function (_, thunkAPI) {
     try {
-      const res = await contactsAxios.get('/contacts');
+      const res = await axios.get('/contacts');
 
       return res.data;
     } catch (err) {
@@ -31,7 +31,7 @@ export const addContact = createAsyncThunk(
   'contacts/addContact',
   async function (contact, thunkAPI) {
     try {
-      const res = await contactsAxios.post('contacts', {
+      const res = await axios.post('/contacts', {
         name: contact.name,
         number: contact.number,
       });
@@ -48,7 +48,7 @@ export const deleteContact = createAsyncThunk(
 
   async function (contactId, thunkAPI) {
     try {
-      const res = await contactsAxios.delete(`/contacts/${contactId}`);
+      const res = await axios.delete(`/contacts/${contactId}`);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
@@ -61,7 +61,7 @@ export const EditContact = createAsyncThunk(
 
   async function (contact, thunkAPI) {
     try {
-      const res = await contactsAxios.put(`/contacts/${contact.id}`, {
+      const res = await axios.put(`/contacts/${contact.id}`, {
         name: contact.name,
         number: contact.number,
       });
