@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/operations';
 import css from './LoginForm.module.css';
 import toast from 'react-hot-toast';
+import { Formik, Form, Field } from 'formik';
 
 const notify = () =>
   toast(`You're logged in`, {
@@ -14,14 +15,16 @@ const notify = () =>
 export const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
+  const initialValues = {
+    email: '',
+    password: '',
+  };
 
+  const handleSubmit = (value, action) => {
     dispatch(
       logIn({
-        email: form.elements.email.value,
-        password: form.elements.password.value,
+        email: value.email,
+        password: value.password,
       })
     )
       .unwrap()
@@ -33,20 +36,22 @@ export const LoginForm = () => {
         console.log('login error');
       });
 
-    form.reset();
+    action.resetForm();
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-      <label className={css.label}>
-        Email
-        <input type="email" name="email" />
-      </label>
-      <label className={css.label}>
-        Password
-        <input type="password" name="password" />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Form className={css.form}>
+        <label className={css.label}>
+          Email
+          <Field type="email" name="email" />
+        </label>
+        <label className={css.label}>
+          Password
+          <Field type="password" name="password" />
+        </label>
+        <button type="submit">Log In</button>
+      </Form>
+    </Formik>
   );
 };
