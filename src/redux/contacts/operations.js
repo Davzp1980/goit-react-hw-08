@@ -10,10 +10,6 @@ const notify = () =>
     },
   });
 
-// const contactsAxios = axios.create({
-//   baseURL: 'https://connections-api.goit.global/users/me',
-// });
-
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async function (_, thunkAPI) {
