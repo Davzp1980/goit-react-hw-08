@@ -11,7 +11,7 @@ const notify = () =>
   });
 
 const contactsAxios = axios.create({
-  baseURL: 'https://66caffad4290b1c4f1993b91.mockapi.io',
+  baseURL: 'https://connections-api.goit.global/',
 });
 
 export const fetchContacts = createAsyncThunk(
