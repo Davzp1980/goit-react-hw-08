@@ -3,6 +3,7 @@ import { logIn } from '../../redux/auth/operations';
 import css from './LoginForm.module.css';
 import toast from 'react-hot-toast';
 import { Formik, Form, Field } from 'formik';
+import { Button } from '@mui/material';
 
 const notify = () =>
   toast(`You're logged in`, {
@@ -44,13 +45,15 @@ export const LoginForm = () => {
       <Form className={css.form}>
         <label className={css.label}>
           Email
-          <Field type="email" name="email" />
+          <Field className={css.field} type="email" name="email" />
         </label>
         <label className={css.label}>
           Password
-          <Field type="password" name="password" />
+          <Field className={css.field} type="password" name="password" />
         </label>
-        <button type="submit">Log In</button>
+        <Button type="submit" variant="contained" color="success">
+          Log In
+        </Button>
       </Form>
     </Formik>
   );
