@@ -8,7 +8,7 @@ import {
   setContactId,
   setModalDelVisible,
   setModalEditVisible,
-} from '../../redux/filtersSlice';
+} from '../../redux/filters/slice';
 import { Button } from '@mui/material';
 
 function Contact({ contact: { id, name, number } }) {

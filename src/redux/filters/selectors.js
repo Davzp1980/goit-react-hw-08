@@ -1,6 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-
-export const selectContacts = state => state.contacts.items;
+import { selectContacts } from '../contacts/selectors';
 
 export const selectError = state => state.contacts.error;
 

@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import css from './ModalEditContact.module.css';
-import { setModalEditVisible } from '../../redux/filtersSlice';
+
 import { EditContact } from '../../redux/contacts/operations';
-import { selectContactId } from '../../redux/selectors';
+import { selectContactId } from '../../redux/filters/selectors';
 import { Field, Formik, Form, ErrorMessage } from 'formik';
 import { Button } from '@mui/material';
+import { setModalEditVisible } from '../../redux/filters/slice';
 
 function ModalEditContact() {
   const dispatch = useDispatch();

@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import css from './ModalDeleteContact.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
-import { selectContactId } from '../../redux/selectors';
-import { setModalDelVisible } from '../../redux/filtersSlice';
+import { selectContactId } from '../../redux/filters/selectors';
 import toast from 'react-hot-toast';
 import { Button } from '@mui/material';
+import { setModalDelVisible } from '../../redux/filters/slice';
 function ModalDeleteContact() {
   const dispatch = useDispatch();
   const id = useSelector(selectContactId);

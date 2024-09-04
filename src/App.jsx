@@ -15,7 +15,7 @@ import {
   selectIsLoading,
   selectIsModalDelVisible,
   selectIsModalEditVisible,
-} from './redux/selectors';
+} from './redux/filters/selectors';
 import { Toaster } from 'react-hot-toast';
 import ModalEditContact from './components/ModalEditContact/ModalEditContact';
 import { RotatingLines } from 'react-loader-spinner';
