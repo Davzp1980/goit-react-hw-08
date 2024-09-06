@@ -7,10 +7,15 @@ import { selectContactId } from '../../redux/filters/selectors';
 import { Field, Formik, Form, ErrorMessage } from 'formik';
 import { Button } from '@mui/material';
 import { setModalEditVisible } from '../../redux/filters/slice';
+import { selectContacts } from '../../redux/contacts/selectors';
 
 function ModalEditContact() {
   const dispatch = useDispatch();
   const id = useSelector(selectContactId);
+  const contacts = useSelector(selectContacts);
+
+  const contactNameEdit = contacts.find(contact => contact.id == id).name;
+  const contactNumberEdit = contacts.find(contact => contact.id == id).number;
 
   function handleEdit(values, actions) {
     dispatch(setModalEditVisible(false));
@@ -25,8 +30,8 @@ function ModalEditContact() {
     actions.resetForm();
   }
   const initialValues = {
-    name: '',
-    number: '',
+    name: contactNameEdit,
+    number: contactNumberEdit,
   };
 
   const ValidationSchema = yup.object().shape({
