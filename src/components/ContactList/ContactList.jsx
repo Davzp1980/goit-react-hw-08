@@ -16,11 +16,13 @@ export function ContactList() {
 
   return (
     <ul className={css.ul}>
-      {sortedContacts.map(contact => (
-        <li key={contact.id}>
-          <Contact contact={contact} />
-        </li>
-      ))}
+      {sortedContacts.length === 0 && <p>Contact list is empty</p>}
+      {Array.isArray(sortedContacts) &&
+        sortedContacts.map(contact => (
+          <li key={contact.id}>
+            <Contact contact={contact} />
+          </li>
+        ))}
     </ul>
   );
 }

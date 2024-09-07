@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/operations';
+import toast from 'react-hot-toast';
 
 export function ContactForm() {
   const contactNameFieldId = useId();
@@ -16,6 +17,8 @@ export function ContactForm() {
     contactName: '',
     phoneNumber: '',
   };
+
+  const phoneRegExp = /^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$/;
   const ValidationSchema = yup.object().shape({
     contactName: yup
       .string()
@@ -24,8 +27,9 @@ export function ContactForm() {
       .required('Must be filled in'),
     phoneNumber: yup
       .string()
-      .min(9, 'Phone number consists of 9 digits')
-      .max(9, 'Phone number consists of 9 digits')
+      .matches(phoneRegExp, 'number format: xxx-xxx-xx-xx')
+      .min(13, 'Phone number consists of 9 digits')
+      .max(13, 'Phone number consists of 9 digits')
       .required('Must be filled in'),
   });
 
@@ -37,7 +41,11 @@ export function ContactForm() {
         name: values.contactName,
         number: values.phoneNumber,
       })
-    );
+    )
+      .unwrap()
+      .then(() => {
+        toast.success('Contact successfully created');
+      });
 
     actions.resetForm();
   }
@@ -47,28 +55,37 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       validationSchema={ValidationSchema}
     >
-      <Form className={css.form}>
-        <label htmlFor={contactNameFieldId}>Name</label>
+      {({ errors }) => (
+        <Form className={css.form}>
+          <label htmlFor={contactNameFieldId}>Name</label>
 
-        <Field
-          className={css.field}
-          type="text"
-          name="contactName"
-          id={contactNameFieldId}
-        />
-        <ErrorMessage name="contactName" component="span" />
-        <label htmlFor={phoneNumberFieldId}>Number</label>
-        <Field
-          className={css.field}
-          type="text"
-          name="phoneNumber"
-          id={phoneNumberFieldId}
-        />
-        <ErrorMessage name="phoneNumber" component="span" />
-        <Button className={css.button} type="submit" variant="contained">
-          Add contact
-        </Button>
-      </Form>
+          <Field
+            className={css.field}
+            type="text"
+            name="contactName"
+            id={contactNameFieldId}
+          />
+
+          <ErrorMessage name="contactName" component="span" />
+          <label htmlFor={phoneNumberFieldId}>Number</label>
+          <Field
+            className={css.field}
+            type="text"
+            name="phoneNumber"
+            id={phoneNumberFieldId}
+            placeholder="098-999-99-99"
+          />
+          <ErrorMessage name="phoneNumber" component="span" />
+          <Button
+            className={css.button}
+            type="submit"
+            variant="contained"
+            disabled={Object.keys(errors).length > 0}
+          >
+            Add contact
+          </Button>
+        </Form>
+      )}
     </Formik>
   );
 }

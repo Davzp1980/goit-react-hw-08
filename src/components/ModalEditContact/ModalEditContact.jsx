@@ -8,6 +8,7 @@ import { Field, Formik, Form, ErrorMessage } from 'formik';
 import { Button } from '@mui/material';
 import { setModalEditVisible } from '../../redux/filters/slice';
 import { selectContacts } from '../../redux/contacts/selectors';
+import toast from 'react-hot-toast';
 
 function ModalEditContact() {
   const dispatch = useDispatch();
@@ -26,14 +27,18 @@ function ModalEditContact() {
         name: values.name,
         number: values.number,
       })
-    );
+    )
+      .unwrap()
+      .then(() => {
+        toast.success('Contact successfully edited');
+      });
     actions.resetForm();
   }
   const initialValues = {
     name: contactNameEdit,
     number: contactNumberEdit,
   };
-
+  const phoneRegExp = /^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$/;
   const ValidationSchema = yup.object().shape({
     name: yup
       .string()
@@ -42,8 +47,9 @@ function ModalEditContact() {
       .required('Must be filled in'),
     number: yup
       .string()
-      .min(9, 'Phone number consists of 9 digits')
-      .max(9, 'Phone number consists of 9 digits')
+      .matches(phoneRegExp, 'number format: xxx-xxx-xx-xx')
+      .min(13, 'Phone number consists of 9 digits')
+      .max(13, 'Phone number consists of 9 digits')
       .required('Must be filled in'),
   });
   return (

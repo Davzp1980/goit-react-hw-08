@@ -1,14 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import toast from 'react-hot-toast';
-
-const notify = () =>
-  toast('Contact created', {
-    duration: 3000,
-    style: {
-      backgroundColor: 'rgb(83, 245, 83)',
-    },
-  });
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -31,7 +22,6 @@ export const addContact = createAsyncThunk(
         name: contact.name,
         number: contact.number,
       });
-      notify();
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);

@@ -10,18 +10,13 @@ function ModalDeleteContact() {
   const dispatch = useDispatch();
   const id = useSelector(selectContactId);
 
-  const notify = () =>
-    toast('Contact deleted', {
-      duration: 3000,
-      style: {
-        backgroundColor: 'rgb(245, 61, 61)',
-      },
-    });
-
   function handleClickDelete() {
-    dispatch(deleteContact(id));
+    dispatch(deleteContact(id))
+      .unwrap()
+      .then(() => {
+        toast.success('Contact successfully deleted');
+      });
     dispatch(setModalDelVisible(false));
-    notify();
   }
   function handleClickReturn() {
     dispatch(setModalDelVisible(false));
